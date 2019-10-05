@@ -1,28 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
-import { Link } from 'react-router-dom';
 import Projects from '../Projects/Projects';
+import Title from '../Title';
 
-const StyledHome = styled.div`
-  h1 {
-    text-align: center;
-  }
-`;
-
-const StyledPlus = styled.div`
-  width: 0.6em;
-  display: inline-block;
-  padding-left: 0.2em;
-
-  svg {
-    vertical-align: top;
-  }
-
-  path {
-    fill: salmon;
-  }
-`;
+const StyledHome = styled.div``;
 
 function Home() {
   const projects = [
@@ -48,14 +30,9 @@ function Home() {
 
   return (
     <StyledHome>
-      <h1>
-        My Projects
-        <Link to={'/new-project'}>
-          <StyledPlus>
-            <Plus />
-          </StyledPlus>
-        </Link>
-      </h1>
+      <Title titleText="My Projects" link="/new-project">
+        <Plus />
+      </Title>
       <Projects projects={projects} />
     </StyledHome>
   );
