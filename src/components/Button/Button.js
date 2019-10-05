@@ -5,8 +5,8 @@ import styled, { css } from 'styled-components';
 const propsCSS = {
   outline: css`
     background-color: white;
-    color: #70C1B3;
-    border: 2px solid #70C1B3;
+    color: #70c1b3;
+    border: 2px solid #70c1b3;
 
     &:hover {
       background-color: ${props => !props.disabled && '#70C1B3'};
@@ -30,7 +30,7 @@ const propsCSS = {
 };
 
 const StyledButton = styled.button`
-  background: #70C1B3;
+  background: #70c1b3;
   display: inline-block;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,7 @@ const StyledButton = styled.button`
   color: white;
 
   position: relative;
-  margin: 3em 0;
+  margin: 1em 0;
   padding: 0.75em 3em;
   box-shadow: 0.28s ease;
   transition: background-color 0.28s ease, color 0.28s ease,
@@ -72,9 +72,14 @@ const StyledButton = styled.button`
   ${props => props.disabled && propsCSS.disabled};
 `;
 
-const Button = ({ children, disabled, ...props }) => {
+const Button = ({ children, disabled, type, ...props }) => {
   return (
-    <StyledButton aria-disabled={disabled} disabled={disabled} {...props}>
+    <StyledButton
+      aria-disabled={disabled}
+      disabled={disabled}
+      type={type}
+      {...props}
+    >
       {children}
     </StyledButton>
   );

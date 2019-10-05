@@ -1,4 +1,4 @@
-@import-normalize; /* bring in normalize.css styles */
+@import-normalize;
 
 body {
   margin: 0;
@@ -6,7 +6,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 10px;
   background: #f4f4f4;
-  color: #212121;
+  color: #50514F;
 }
 
 code {

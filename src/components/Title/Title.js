@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
 import { Link } from 'react-router-dom';
 
 const StyledTitle = styled.div`

@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import placeholder from '../../../assets/images/placeholder.png';
 
 const StyledProject = styled.div`
-  background: #eaeaea;
-  color: #696969;
+  background: white;
+  color: #50514F;
+  box-shadow: 0 4px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
 
   img {
     object-fit: cover;
