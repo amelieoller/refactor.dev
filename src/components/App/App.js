@@ -10,6 +10,7 @@ const StyledApp = styled.div`
 function App() {
   return (
     <StyledApp>
+      <Button>Click Me!</Button>
     </StyledApp>
   );
 }
