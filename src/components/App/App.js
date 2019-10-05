@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../Button';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NewProject from '../Projects/NewProject';
 import Home from '../Home';
 

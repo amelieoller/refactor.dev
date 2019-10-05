@@ -6,6 +6,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 10px;
   background: #f4f4f4;
+  color: #212121;
 }
 
 code {
@@ -16,4 +17,14 @@ code {
 h1 {
   font-weight: 300;
   font-size: 2.8em;
+}
+
+h2 {
+  font-weight: 300;
+  font-size: 2.2em;
+}
+
+p {
+  font-weight: 300;
+  font-size: 1.5em;
 }
