@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledInput = styled.div`
   position: relative;
@@ -18,7 +19,7 @@ const StyledInput = styled.div`
     transition: all 0.28s ease;
 
     .asterisk {
-      color: #F25F5C;
+      color: #f25f5c;
       margin-left: 0.15em;
     }
   }
@@ -96,5 +97,14 @@ function Input({ placeholder, required }) {
     </StyledInput>
   );
 }
+
+Input.propTypes = {
+  placeholder: PropTypes.string.isRequired,
+  required: PropTypes.bool
+};
+
+Input.defaultProps = {
+  required: false
+};
 
 export default Input;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledFilter = styled.div`
   margin-bottom: 1.4em;
@@ -26,18 +27,26 @@ const StyledFilter = styled.div`
   }
 `;
 
-function Filter() {
+function Filter({ tags }) {
   return (
     <StyledFilter>
       <div className="title">FILTER BY TAG</div>
-      <span className="badge">JavaScript</span>
-      <span className="badge">Ruby</span>
-      <span className="badge">React</span>
-      <span className="badge">Redux</span>
-      <span className="badge">Firebase</span>
-      <span className="badge">Rails</span>
+      {tags.map(tag => (
+        <span key={tag.id} className="badge">
+          {tag.name}
+        </span>
+      ))}
     </StyledFilter>
   );
 }
+
+Filter.propTypes = {
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired
+    })
+  ).isRequired
+};
 
 export default Filter;

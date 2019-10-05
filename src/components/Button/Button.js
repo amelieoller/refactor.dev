@@ -86,13 +86,9 @@ const Button = ({ children, disabled, type, ...props }) => {
 };
 
 Button.propTypes = {
-  /** Elements or text rendered inside button */
   children: PropTypes.node.isRequired,
-  /** Gets called when the button is clicked */
   onClick: PropTypes.func,
-  /** Sets the button's state and aria to `disabled` */
   disabled: PropTypes.bool,
-  /** Render secondary button with inverted theme */
   outline: PropTypes.bool
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Project from './Project';
+import PropTypes from 'prop-types';
 
 const StyledProjects = styled.div`
   display: grid;
@@ -18,5 +19,9 @@ function Projects({ projects }) {
     </StyledProjects>
   );
 }
+
+Projects.propTypes = {
+  projects: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default Projects;

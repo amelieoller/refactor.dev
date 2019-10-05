@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const StyledTitle = styled.div`
   h1 {
     text-align: center;
-    color: #247BA0;
+    color: #247ba0;
 
     & > span {
       text-decoration: underline;
@@ -48,5 +49,11 @@ function Title({ titleText, children, link }) {
     </StyledTitle>
   );
 }
+
+Title.propTypes = {
+  titleText: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  link: PropTypes.string.isRequired
+};
 
 export default Title;
