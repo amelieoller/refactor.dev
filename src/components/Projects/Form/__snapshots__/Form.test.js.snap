@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot 1`] = `
+<div>
+  <div
+    class="sc-htpNat eCNowg"
+  >
+    <form
+      data-testid="form"
+    >
+      <div
+        class="sc-bwzfXH jqqosM"
+      >
+        <input
+          id="title"
+          name="title"
+          required=""
+          type="text"
+        />
+        <label
+          for="title"
+        >
+          Title
+        </label>
+        <i
+          class="bar"
+        />
+      </div>
+      <div
+        class="sc-bwzfXH jqqosM"
+      >
+        <input
+          id="description"
+          name="description"
+          required=""
+          type="text"
+        />
+        <label
+          for="description"
+        >
+          Description
+        </label>
+        <i
+          class="bar"
+        />
+      </div>
+      <div
+        class="sc-bwzfXH jqqosM"
+      >
+        <input
+          id="github"
+          name="github"
+          required=""
+          type="text"
+        />
+        <label
+          for="github"
+        >
+          GitHub URL
+        </label>
+        <i
+          class="bar"
+        />
+      </div>
+      <div
+        class="sc-bwzfXH jqqosM"
+      >
+        <input
+          id="folder"
+          name="folder"
+          required=""
+          type="text"
+        />
+        <label
+          for="folder"
+        >
+          Folder Name
+        </label>
+        <i
+          class="bar"
+        />
+      </div>
+      <div
+        class="sc-bwzfXH jqqosM"
+      >
+        <input
+          id="image"
+          name="image"
+          required=""
+          type="text"
+        />
+        <label
+          for="image"
+        >
+          Image
+        </label>
+        <i
+          class="bar"
+        />
+      </div>
+      <div
+        class="sc-bwzfXH jqqosM"
+      >
+        <input
+          id="server"
+          name="server"
+          required=""
+          type="text"
+        />
+        <label
+          for="server"
+        >
+          Server Command
+        </label>
+        <i
+          class="bar"
+        />
+      </div>
+      <button
+        aria-disabled="false"
+        class="sc-bdVaJa dmOrLZ"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+`;

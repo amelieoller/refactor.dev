@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import Button from '../../Button';
 import Input from './Input';
 
 const StyledForm = styled.div`
-  .container {
-    position: relative;
-    max-width: 40em;
-    margin: 5em auto;
-    background: #fff;
-    width: 100%;
-    padding: 3em 5em;
-    border-radius: 3px;
-  }
+  position: relative;
+  max-width: 40em;
+  margin: 5em auto;
+  background: #fff;
+  width: 100%;
+  padding: 3em 5em;
+  border-radius: 3px;
 
-  .container::before {
+  &::before {
     content: '';
     position: absolute;
     top: 0;
@@ -29,22 +27,55 @@ const StyledForm = styled.div`
   }
 `;
 
-function Form() {
-  return (
-    <StyledForm>
-      <div className="container">
-        <form>
-          <Input placeholder="Title" required />
-          <Input placeholder="Description" required />
-          <Input placeholder="GitHub URL" />
-          <Input placeholder="Folder Name" />
-          <Input placeholder="Image" />
-          <Input placeholder="Server Command" />
+class Form extends Component {
+  state = {
+    title: '',
+    description: '',
+    github: '',
+    folder: '',
+    image: '',
+    server: ''
+  };
+
+  render() {
+    const { handleSubmit } = this.props;
+
+    return (
+      <StyledForm>
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            const {
+              title,
+              description,
+              folder,
+              github,
+              image,
+              server
+            } = e.target.elements;
+
+            handleSubmit({
+              title: title.value,
+              description: description.value,
+              folder: folder.value,
+              github: github.value,
+              image: image.value,
+              server: server.value
+            });
+          }}
+          data-testid="form"
+        >
+          <Input name="title" placeholder="Title" required />
+          <Input name="description" placeholder="Description" required />
+          <Input name="github" placeholder="GitHub URL" />
+          <Input name="folder" placeholder="Folder Name" />
+          <Input name="image" placeholder="Image" />
+          <Input name="server" placeholder="Server Command" />
           <Button type="submit">Submit</Button>
         </form>
-      </div>
-    </StyledForm>
-  );
+      </StyledForm>
+    );
+  }
 }
 
 export default Form;
