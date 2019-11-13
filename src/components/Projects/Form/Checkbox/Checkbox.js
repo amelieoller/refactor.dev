@@ -2,20 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledCheckbox = styled.div`
-  margin-top: 3em;
-  margin-bottom: 1em;
+  display: inline-block;
+  margin-right: 0.6rem;
 
   label {
     position: relative;
     cursor: pointer;
-    padding-left: 1.5em;
+    padding-left: 1.3rem;
     text-align: left;
-    color: #50514F;
+    color: #50514f;
     display: block;
-    font-size: 1.5em;
+    font-size: 1.5rem;
 
     &:hover .helper {
-      color: #70C1B3;
+      color: #70c1b3;
     }
   }
 
@@ -26,7 +26,7 @@ const StyledCheckbox = styled.div`
     left: 0;
 
     &:checked ~ .helper {
-      color: #70C1B3;
+      color: #70c1b3;
 
       &,
       ::after,
@@ -36,11 +36,11 @@ const StyledCheckbox = styled.div`
       }
 
       &::after {
-        height: 0.5em;
+        height: 0.5rem;
       }
 
       &::before {
-        height: 1.2em;
+        height: 1.2rem;
         transition-delay: 0.28s;
       }
     }
@@ -51,51 +51,52 @@ const StyledCheckbox = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    width: 0.8em;
-    height: 0.8em;
+    width: 0.8rem;
+    height: 0.8rem;
     z-index: 0;
     border: 0.125em solid currentColor;
-    border-radius: 0.0625em;
+    border-radius: 0.0625rem;
     transition: border-color 0.28s ease;
 
     &::before,
     &::after {
       position: absolute;
       height: 0;
-      width: 0.2em;
-      background-color: #70C1B3;
+      width: 0.2rem;
+      background-color: #70c1b3;
       display: block;
       transform-origin: left top;
-      border-radius: 0.25em;
+      border-radius: 0.25rem;
       content: '';
       transition: opacity 0.28s ease, height 0s linear 0.28s;
       opacity: 0;
     }
 
     &::before {
-      top: 0.65em;
-      left: 0.38em;
+      top: 0.65rem;
+      left: 0.38rem;
       transform: rotate(-135deg);
       box-shadow: 0 0 0 0.0625em #fff;
     }
     &::after {
-      top: 0.3em;
+      top: 0.3rem;
       left: 0;
       transform: rotate(-45deg);
     }
   }
 
   & + .checkbox {
-    margin-top: 1em;
+    margin-top: 1rem;
   }
 `;
 
-function Checkbox() {
+function Checkbox(props) {
   return (
     <StyledCheckbox>
       <label>
-        <input type="checkbox" />
-        <i className="helper"></i>I'm the label from a checkbox
+        <input type="checkbox" {...props} />
+        <i className="helper"></i>
+        {props.name}
       </label>
     </StyledCheckbox>
   );

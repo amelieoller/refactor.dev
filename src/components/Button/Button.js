@@ -47,7 +47,7 @@ const StyledButton = styled.button`
 
   position: relative;
   margin: 1em 0;
-  padding: 0.75em 3em;
+  padding: 0.75rem 3rem;
   box-shadow: 0.28s ease;
   transition: background-color 0.28s ease, color 0.28s ease,
     box-shadow 0.28s ease;

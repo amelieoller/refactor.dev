@@ -4,23 +4,23 @@ import PropTypes from 'prop-types';
 
 const StyledInput = styled.div`
   position: relative;
-  margin-top: 2.25em;
-  margin-bottom: 2.25em;
+  margin-top: 2.25rem;
+  margin-bottom: 2.25rem;
 
   label {
     position: absolute;
-    top: 0.65em;
+    top: 0.65rem;
     pointer-events: none;
-    padding-left: 0.13em;
+    padding-left: 0.13rem;
     z-index: 1;
     color: #b3b3b3;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     font-weight: normal;
     transition: all 0.28s ease;
 
     .asterisk {
       color: #f25f5c;
-      margin-left: 0.15em;
+      margin-left: 0.15rem;
     }
   }
 
@@ -31,10 +31,10 @@ const StyledInput = styled.div`
 
     &::before {
       content: '';
-      height: 0.13em;
+      height: 0.13rem;
       width: 0;
       left: 50%;
-      bottom: -0.063em;
+      bottom: -0.063rem;
       position: absolute;
       background: #247ba0;
       transition: left 0.28s ease, width 0.28s ease;
@@ -43,11 +43,11 @@ const StyledInput = styled.div`
   }
 
   input {
-    height: 1.8em;
+    height: 1.8rem;
     display: block;
     background: none;
-    padding: 0.13em 0.13em 0.063em;
-    font-size: 1.5em;
+    padding: 0.13em 0.13em 0.063rem;
+    font-size: 1.5rem;
     border-width: 0;
     border-color: transparent;
     line-height: 1.8;
@@ -63,9 +63,9 @@ const StyledInput = styled.div`
       color: #50514f;
 
       & ~ label {
-        font-size: 1em;
+        font-size: 1rem;
         color: gray;
-        top: -0.9em;
+        top: -0.9rem;
         left: 0;
       }
     }
@@ -85,10 +85,16 @@ const StyledInput = styled.div`
   }
 `;
 
-function Input({ placeholder, required }) {
+function Input({ placeholder, required, onChange, name, value }) {
   return (
     <StyledInput>
-      <input type="text" required />
+      <input
+        type="text"
+        onChange={onChange}
+        name={name}
+        value={value}
+        required
+      />
       <label htmlFor="input">
         {placeholder}
         {required && <span className="asterisk">*</span>}
