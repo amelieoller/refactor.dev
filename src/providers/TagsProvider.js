@@ -10,7 +10,7 @@ class TagsProvider extends Component {
   unsubscribe = null;
 
   componentDidMount = () => {
-    this.unsubscribe = firestore.collection("tags").onSnapshot(snapshot => {
+    this.unsubscribe = firestore.collection("tags").orderBy("name", "asc").onSnapshot(snapshot => {
       const tags = snapshot.docs.map(collectIdsAndData);
       this.setState({ tags });
     });

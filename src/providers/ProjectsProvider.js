@@ -10,7 +10,7 @@ class ProjectsProvider extends Component {
   unsubscribe = null;
 
   componentDidMount = () => {
-    this.unsubscribe = firestore.collection("projects").onSnapshot(snapshot => {
+    this.unsubscribe = firestore.collection("projects").orderBy("updated", "desc").onSnapshot(snapshot => {
       const projects = snapshot.docs.map(collectIdsAndData);
       this.setState({ projects });
     });
