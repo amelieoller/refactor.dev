@@ -3,114 +3,56 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const StyledInput = styled.div`
-  position: relative;
-  margin-top: 2.25rem;
-  margin-bottom: 2.25rem;
+  margin-bottom: 1.6rem;
 
   label {
-    position: absolute;
-    top: 0.65rem;
-    pointer-events: none;
-    padding-left: 0.13rem;
-    z-index: 1;
-    color: #b3b3b3;
-    font-size: 1.5rem;
-    font-weight: normal;
-    transition: all 0.28s ease;
-
-    .asterisk {
-      color: #f25f5c;
-      margin-left: 0.15rem;
-    }
-  }
-
-  .bar {
-    position: relative;
-    border-bottom: 0.063em solid #999;
-    display: block;
-
-    &::before {
-      content: '';
-      height: 0.13rem;
-      width: 0;
-      left: 50%;
-      bottom: -0.063rem;
-      position: absolute;
-      background: #247ba0;
-      transition: left 0.28s ease, width 0.28s ease;
-      z-index: 2;
-    }
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #818181;
   }
 
   input {
-    height: 1.8rem;
-    display: block;
-    background: none;
-    padding: 0.13em 0.13em 0.063rem;
-    font-size: 1.5rem;
-    border-width: 0;
-    border-color: transparent;
-    line-height: 1.8;
+    margin-top: 0.4rem;
+    font-size: 1.4rem;
     width: 100%;
-    color: transparent;
-    transition: all 0.28s ease;
-    box-shadow: none;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #c5c5c5;
+    color: #50514f;
+  }
 
-    &:focus,
-    &:valid,
-    &.form-file,
-    &.has-value {
-      color: #50514f;
-
-      & ~ label {
-        font-size: 1rem;
-        color: gray;
-        top: -0.9rem;
-        left: 0;
-      }
-    }
-
-    &:focus {
-      outline: none;
-
-      & ~ label {
-        color: #247ba0;
-      }
-
-      & ~ .bar::before {
-        width: 100%;
-        left: 0;
-      }
-    }
+  input:focus {
+    border-color: #776eff87;
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px #776eff87;
+    outline: 0 none;
   }
 `;
 
-function Input({ placeholder, required, onChange, name, value }) {
+function Input(props) {
   return (
     <StyledInput>
-      <input
-        type="text"
-        onChange={onChange}
-        name={name}
-        value={value}
-        required
-      />
-      <label htmlFor="input">
-        {placeholder}
-        {required && <span className="asterisk">*</span>}
+      <label htmlFor={props.name} className="form-label">
+        {props.title}
       </label>
-      <i className="bar"></i>
+      <input
+        className="form-input"
+        id={props.name}
+        name={props.name}
+        type={props.type}
+        value={props.value}
+        onChange={props.handleChange}
+        placeholder={props.placeholder}
+      />
     </StyledInput>
   );
 }
 
 Input.propTypes = {
   placeholder: PropTypes.string.isRequired,
-  required: PropTypes.bool
+  required: PropTypes.bool,
 };
 
 Input.defaultProps = {
-  required: false
+  required: false,
 };
 
 export default Input;

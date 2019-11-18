@@ -1,17 +1,27 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Project from './Project';
-import PropTypes from 'prop-types';
 import { ProjectsContext } from '../../providers/ProjectsProvider';
 
 const StyledProjects = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 2rem;
-  margin-top: 3rem;
+  grid-gap: 5rem;
+  margin-top: 4rem;
 
   & > div {
-    border-radius: 0.6rem;
+    padding: 3.5rem;
+  }
+
+  @media (max-width: 650px) {
+    & > div {
+      padding: 0 3rem;
+
+      &:nth-child(odd) {
+        padding: 3.5rem;
+        background: #ff5d5da6;
+      }
+    }
   }
 `;
 
@@ -26,7 +36,5 @@ const Projects = () => {
     </StyledProjects>
   );
 };
-
-Projects.propTypes = {};
 
 export default Projects;

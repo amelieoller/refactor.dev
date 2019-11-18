@@ -9,25 +9,15 @@ import { TagsContext } from '../../../providers/TagsProvider';
 
 const StyledForm = styled.div`
   position: relative;
-  max-width: 40rem;
+  max-width: 50rem;
   margin: 5em auto;
   background: #fff;
   width: 100%;
-  padding: 3em 5rem;
-  border-radius: 3px;
+  padding: 3.5rem;
+  border: 1px solid #c5c5c5;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    box-shadow: 0 4px 10px 1px rgba(0, 0, 0, 0.14),
-      0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
-    transform: scale(0.98);
-    transition: transform 0.28s ease-in-out;
-    z-index: -1;
+  .checkboxes {
+    margin: 2.5rem 0;
   }
 `;
 
@@ -40,7 +30,8 @@ const Form = ({ existingProject, history }) => {
     folder: '',
     image: '',
     server: '',
-    tags: []
+    tags: [],
+    updated: new Date()
   };
 
   const [project, setProject] = useState(initialProjectState);
@@ -84,51 +75,62 @@ const Form = ({ existingProject, history }) => {
   };
 
   const handleUpdate = () => {
-    firestore.doc(`projects/${project.id}`).update(project);
+    const updated = new Date();
+    firestore.doc(`projects/${project.id}`).update({ ...project, updated });
   };
 
   return (
     <StyledForm>
       <form onSubmit={handleSubmit}>
         <Input
-          onChange={handleChange}
+          handleChange={handleChange}
           value={project.title}
           name="title"
           placeholder="Title"
-          required
+          type="text"
+          title="Title"
         />
         <Input
-          onChange={handleChange}
+          handleChange={handleChange}
           value={project.description}
           name="description"
           placeholder="Description"
-          required
+          title="Description"
+          type="text"
         />
         <Input
-          onChange={handleChange}
+          handleChange={handleChange}
           value={project.github}
           name="github"
           placeholder="GitHub URL"
+          title="GitHub URL"
+          type="text"
         />
         <Input
-          onChange={handleChange}
+          handleChange={handleChange}
           value={project.folder}
           name="folder"
           placeholder="Folder Name"
+          title="Folder Name"
+          type="text"
         />
         <Input
-          onChange={handleChange}
+          handleChange={handleChange}
           value={project.image}
           name="image"
           placeholder="Image"
+          title="Image"
+          type="text"
         />
         <Input
-          onChange={handleChange}
+          handleChange={handleChange}
           value={project.server}
           name="server"
           placeholder="Server Command"
+          title="Server Command"
+          type="text"
         />
-        <div>
+        <div className="checkboxes">
           {tags &&
             tags.map(tag => (
               <Checkbox

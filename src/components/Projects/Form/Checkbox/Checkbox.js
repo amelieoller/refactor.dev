@@ -3,19 +3,25 @@ import styled from 'styled-components';
 
 const StyledCheckbox = styled.div`
   display: inline-block;
-  margin-right: 0.6rem;
+  margin-right: 0.8rem;
+  margin-bottom: 0.8rem;
 
   label {
     position: relative;
     cursor: pointer;
-    padding-left: 1.3rem;
+    padding-left: 1.8rem;
     text-align: left;
-    color: #50514f;
+    color: #818181;
     display: block;
     font-size: 1.5rem;
 
+    &:hover,
+    &:active {
+      color: #50514f;
+    }
+
     &:hover .helper {
-      color: #70c1b3;
+      color: #776eff;
     }
   }
 
@@ -26,7 +32,7 @@ const StyledCheckbox = styled.div`
     left: 0;
 
     &:checked ~ .helper {
-      color: #70c1b3;
+      color: #776eff;
 
       &,
       ::after,
@@ -36,11 +42,11 @@ const StyledCheckbox = styled.div`
       }
 
       &::after {
-        height: 0.5rem;
+        height: 0.7rem;
       }
 
       &::before {
-        height: 1.2rem;
+        height: 1.7rem;
         transition-delay: 0.28s;
       }
     }
@@ -51,8 +57,8 @@ const StyledCheckbox = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    width: 0.8rem;
-    height: 0.8rem;
+    width: 1.5rem;
+    height: 1.5rem;
     z-index: 0;
     border: 0.125em solid currentColor;
     border-radius: 0.0625rem;
@@ -62,8 +68,8 @@ const StyledCheckbox = styled.div`
     &::after {
       position: absolute;
       height: 0;
-      width: 0.2rem;
-      background-color: #70c1b3;
+      width: 0.25rem;
+      background-color: #776eff;
       display: block;
       transform-origin: left top;
       border-radius: 0.25rem;
@@ -73,13 +79,14 @@ const StyledCheckbox = styled.div`
     }
 
     &::before {
-      top: 0.65rem;
-      left: 0.38rem;
+      top: 1rem;
+      left: 0.6rem;
       transform: rotate(-135deg);
       box-shadow: 0 0 0 0.0625em #fff;
     }
+
     &::after {
-      top: 0.3rem;
+      top: 0.4rem;
       left: 0;
       transform: rotate(-45deg);
     }
