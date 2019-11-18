@@ -37,13 +37,13 @@ const StyledHeader = styled.div`
       }
     }
 
-    @media (max-width: 650px) {
+    @media (max-width: 750px) {
       margin: 3rem;
     }
   }
 `;
 
-function Header({ children, titleText }) {
+const Header = ({ children, titleText }) => {
   return (
     <StyledHeader>
       <div className="header">
@@ -54,7 +54,7 @@ function Header({ children, titleText }) {
       </div>
     </StyledHeader>
   );
-}
+};
 
 Header.propTypes = {
   titleText: PropTypes.string.isRequired,

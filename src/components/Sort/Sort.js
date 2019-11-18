@@ -26,14 +26,12 @@ const StyledSort = styled.div`
   }
 `;
 
-function Sort() {
-  return (
-    <StyledSort>
-      <div className="title">SORT</div>
-      <span className="badge">Date</span>
-      <span className="badge">Updated</span>
-    </StyledSort>
-  );
-}
+const Sort = () => (
+  <StyledSort>
+    <div className="title">SORT</div>
+    <span className="badge">Date</span>
+    <span className="badge">Updated</span>
+  </StyledSort>
+);
 
 export default Sort;

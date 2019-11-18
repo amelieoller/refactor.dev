@@ -28,12 +28,12 @@ const StyledFilter = styled.div`
     }
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 750px) {
     margin: 3rem;
   }
 `;
 
-function Filter() {
+const Filter = () => {
   const { tags } = useContext(TagsContext);
   const { updateFilter, filter } = useContext(ProjectsContext);
 
@@ -51,6 +51,6 @@ function Filter() {
       ))}
     </StyledFilter>
   );
-}
+};
 
 export default Filter;

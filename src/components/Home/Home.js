@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
 import Projects from '../Projects/Projects';
 import Filter from '../Filter';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
+import SingleProject from '../Projects/SingleProject';
 
 const StyledHome = styled.div`
   .header {
@@ -40,13 +41,19 @@ const StyledHome = styled.div`
       }
     }
 
-    @media (max-width: 650px) {
+    @media (max-width: 750px) {
       margin: 3rem;
     }
   }
 `;
 
-function Home() {
+const Home = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  const selectProject = project => {
+    selectedProject ? setSelectedProject(null) : setSelectedProject(project);
+  };
+
   return (
     <StyledHome>
       <Header titleText="Project Keeper">
@@ -55,9 +62,12 @@ function Home() {
         </Link>
       </Header>
       <Filter />
-      <Projects />
+      {selectedProject && (
+        <SingleProject project={selectedProject} selectProject={selectProject} />
+      )}
+      <Projects selectProject={selectProject} />
     </StyledHome>
   );
-}
+};
 
 export default Home;

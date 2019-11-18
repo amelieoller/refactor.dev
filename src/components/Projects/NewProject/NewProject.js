@@ -7,17 +7,15 @@ import { Link } from 'react-router-dom';
 
 const StyledNewProject = styled.div``;
 
-function NewProject() {
-  return (
-    <StyledNewProject>
-      <Header titleText="New Project">
-        <Link to="/">
-          <Home />
-        </Link>
-      </Header>
-      <Form />
-    </StyledNewProject>
-  );
-}
+const NewProject = () => (
+  <StyledNewProject>
+    <Header titleText="New Project">
+      <Link to="/">
+        <Home />
+      </Link>
+    </Header>
+    <Form />
+  </StyledNewProject>
+);
 
 export default NewProject;

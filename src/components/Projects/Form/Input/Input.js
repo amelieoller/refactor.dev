@@ -27,7 +27,7 @@ const StyledInput = styled.div`
   }
 `;
 
-function Input(props) {
+const Input = props => {
   return (
     <StyledInput>
       <label htmlFor={props.name} className="form-label">
@@ -44,15 +44,15 @@ function Input(props) {
       />
     </StyledInput>
   );
-}
+};
 
 Input.propTypes = {
   placeholder: PropTypes.string.isRequired,
-  required: PropTypes.bool,
+  required: PropTypes.bool
 };
 
 Input.defaultProps = {
-  required: false,
+  required: false
 };
 
 export default Input;

@@ -97,7 +97,7 @@ const StyledCheckbox = styled.div`
   }
 `;
 
-function Checkbox(props) {
+const Checkbox = props => {
   return (
     <StyledCheckbox>
       <label>
@@ -107,6 +107,6 @@ function Checkbox(props) {
       </label>
     </StyledCheckbox>
   );
-}
+};
 
 export default Checkbox;

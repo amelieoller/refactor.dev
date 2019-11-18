@@ -30,13 +30,14 @@ const Form = ({ existingProject, history }) => {
     folder: '',
     image: '',
     server: '',
+    live: '',
     tags: [],
     updated: new Date()
   };
 
   const [project, setProject] = useState(initialProjectState);
   useEffect(() => {
-    !!existingProject && setProject(existingProject);
+    !!existingProject && setProject({ ...initialProjectState, ...existingProject });
   }, [existingProject]);
 
   const handleTagSelect = e => {
@@ -128,6 +129,14 @@ const Form = ({ existingProject, history }) => {
           name="server"
           placeholder="Server Command"
           title="Server Command"
+          type="text"
+        />
+        <Input
+          handleChange={handleChange}
+          value={project.live && project.live}
+          name="live"
+          placeholder="Live Site"
+          title="Live Site"
           type="text"
         />
         <div className="checkboxes">

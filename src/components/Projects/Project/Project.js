@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { firestore } from '../../../firebase';
 import { ReactComponent as Trash } from '../../../assets/icons/trash.svg';
 import { ReactComponent as Edit } from '../../../assets/icons/edit.svg';
+import { ReactComponent as GitHub } from '../../../assets/icons/github.svg';
+import { ReactComponent as Monitor } from '../../../assets/icons/monitor.svg';
 
 const StyledProject = styled.div`
   background: white;
@@ -11,6 +13,7 @@ const StyledProject = styled.div`
   display: grid;
   grid-template-rows: 270px auto;
   border: 1px solid #c5c5c5;
+  padding: 3.5rem;
 
   .project-image {
     background-image: ${props => `url(${props.image})`};
@@ -49,6 +52,7 @@ const StyledProject = styled.div`
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
+        margin: 1rem 0;
       }
 
       h3 {
@@ -59,24 +63,27 @@ const StyledProject = styled.div`
       }
 
       .tags {
-        span {
-          font-style: italic;
-          color: #aeaeae;
-        }
+        color: #aeaeae;
+        font-style: italic;
       }
     }
 
     .footer {
-      margin-top: 1rem;
+      margin-top: 2rem;
       text-align: right;
 
       a {
         color: inherit;
+        margin-left: 0.8rem;
       }
 
       svg {
         margin-left: 0.5rem;
         cursor: pointer;
+
+        &:hover {
+          color: #776eff;
+        }
       }
 
       .button {
@@ -85,12 +92,12 @@ const StyledProject = styled.div`
     }
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 750px) {
     border: none;
   }
 `;
 
-function Project({ project }) {
+const Project = ({ project, selectProject }) => {
   const handleDelete = id => {
     firestore.doc(`projects/${id}`).delete();
   };
@@ -104,14 +111,9 @@ function Project({ project }) {
       }
     >
       <div className="project-image"></div>
-      {/* <img src={project.image ? project.image : placeholder} alt="" /> */}
       <div className="content">
         <div className="main">
-          <h3>
-            <a target="_blank" rel="noopener noreferrer" href={project.github}>
-              {project.title}
-            </a>
-          </h3>
+          <h3 onClick={() => selectProject(project)}>{project.title} </h3>
           <p>{project.description}</p>
 
           <div className="tags">
@@ -122,19 +124,31 @@ function Project({ project }) {
         </div>
 
         <div className="footer">
+          {project.github && (
+            <a target="_blank" rel="noopener noreferrer" href={project.github}>
+              <GitHub />
+            </a>
+          )}
+          {project.server && (
+            <a target="_blank" rel="noopener noreferrer" href={project.live}>
+              <Monitor />
+            </a>
+          )}
           <a href={`/projects/${project.id}/edit`}>
             <Edit />
           </a>
-          <Trash
+          <a
             onClick={() => {
               if (window.confirm('Are you sure?')) handleDelete(project.id);
             }}
-          />
+          >
+            <Trash />
+          </a>
         </div>
       </div>
     </StyledProject>
   );
-}
+};
 
 Project.propTypes = {
   project: PropTypes.shape({
@@ -144,7 +158,8 @@ Project.propTypes = {
     folder: PropTypes.string.isRequired,
     github: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired
-  })
+  }),
+  selectProject: PropTypes.func
 };
 
 export default Project;

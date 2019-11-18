@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Project from './Project';
 import { ProjectsContext } from '../../providers/ProjectsProvider';
+import PropTypes from 'prop-types';
 
 const StyledProjects = styled.div`
   display: grid;
@@ -9,32 +10,38 @@ const StyledProjects = styled.div`
   grid-gap: 5rem;
   margin-top: 4rem;
 
-  & > div {
-    padding: 3.5rem;
-  }
+  @media (max-width: 750px) {
+    grid-template-columns: 1fr;
 
-  @media (max-width: 650px) {
     & > div {
       padding: 0 3rem;
 
       &:nth-child(odd) {
         padding: 3.5rem;
-        background: #ff5d5da6;
+        background: #ff9a9a;
+
+        .tags > span {
+          color: white;
+        }
       }
     }
   }
 `;
 
-const Projects = () => {
+const Projects = ({ selectProject }) => {
   const { projects } = useContext(ProjectsContext);
 
   return (
     <StyledProjects>
       {projects.map(project => (
-        <Project key={project.id} project={project} />
+        <Project key={project.id} project={project} selectProject={selectProject} />
       ))}
     </StyledProjects>
   );
+};
+
+Projects.propTypes = {
+  selectProject: PropTypes.func.isRequired
 };
 
 export default Projects;
