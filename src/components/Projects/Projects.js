@@ -18,7 +18,7 @@ const StyledProjects = styled.div`
 
       &:nth-child(odd) {
         padding: 3.5rem;
-        background: #ff9a9a;
+        background: ${props => props.theme.primaryBackground};
 
         .tags > span {
           color: white;

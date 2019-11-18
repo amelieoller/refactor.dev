@@ -28,7 +28,7 @@ const StyledHome = styled.div`
         margin-left: 0.6rem;
 
         &:hover path {
-          fill: #776eff;
+          fill: ${props => props.theme.primary};
         }
 
         &:hover {
@@ -36,7 +36,7 @@ const StyledHome = styled.div`
         }
 
         path {
-          fill: #776eff6b;
+          fill: ${props => props.theme.primary}6b;
         }
       }
     }

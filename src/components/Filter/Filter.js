@@ -11,14 +11,14 @@ const StyledFilter = styled.div`
     font-size: 1.4rem;
     border-radius: 0.3rem;
     padding: 0.2rem 1rem;
-    border: 1px solid #776eff;
-    color: #776eff;
+    border: 1px solid ${props => props.theme.primary};
+    color: ${props => props.theme.primary};
     margin-right: 1rem;
     margin-bottom: 1rem;
     cursor: pointer;
 
     &.selected {
-      background: #776eff;
+      background: ${props => props.theme.primary};
       color: white;
     }
 

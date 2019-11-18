@@ -7,12 +7,12 @@ const StyledButton = styled.button`
   font-size: 1.4rem;
   border-radius: 0.3rem;
   padding: 0.6rem 1.4rem;
-  border: 1px solid #776eff;
-  color: #776eff;
+  border: 1px solid ${props => props.theme.primary};
+  color: ${props => props.theme.primary};
   cursor: pointer;
 
   &.selected {
-    background: #776eff;
+    background: ${props => props.theme.primary};
     color: white;
   }
 

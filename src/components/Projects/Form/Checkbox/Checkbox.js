@@ -17,11 +17,11 @@ const StyledCheckbox = styled.div`
 
     &:hover,
     &:active {
-      color: #50514f;
+      color: background: ${props => props.theme.text};
     }
 
     &:hover .helper {
-      color: #776eff;
+      color: ${props => props.theme.primary};
     }
   }
 
@@ -32,7 +32,7 @@ const StyledCheckbox = styled.div`
     left: 0;
 
     &:checked ~ .helper {
-      color: #776eff;
+      color: ${props => props.theme.primary};
 
       &,
       ::after,
@@ -69,7 +69,7 @@ const StyledCheckbox = styled.div`
       position: absolute;
       height: 0;
       width: 0.25rem;
-      background-color: #776eff;
+      background-color: ${props => props.theme.primary};
       display: block;
       transform-origin: left top;
       border-radius: 0.25rem;

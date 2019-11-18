@@ -13,7 +13,7 @@ const StyledHeader = styled.div`
       h1 {
         font-size: 3rem;
         margin: 0;
-        color: #776eff6b;
+        color: ${props => props.theme.primary}6b;
       }
     }
 
@@ -24,7 +24,7 @@ const StyledHeader = styled.div`
         margin-left: 0.6rem;
 
         &:hover path {
-          fill: #776eff;
+          fill: ${props => props.theme.primary};
         }
 
         &:hover {
@@ -32,7 +32,7 @@ const StyledHeader = styled.div`
         }
 
         path {
-          fill: #776eff6b;
+          fill: ${props => props.theme.primary}6b;
         }
       }
     }

@@ -9,7 +9,7 @@ import { ReactComponent as Monitor } from '../../../assets/icons/monitor.svg';
 
 const StyledProject = styled.div`
   background: white;
-  color: #50514f;
+  color: background: ${props => props.theme.text};
   display: grid;
   grid-template-rows: 270px auto;
   border: 1px solid #c5c5c5;
@@ -82,7 +82,7 @@ const StyledProject = styled.div`
         cursor: pointer;
 
         &:hover {
-          color: #776eff;
+          color: ${props => props.theme.primary};
         }
       }
 

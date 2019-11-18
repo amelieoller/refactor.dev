@@ -5,13 +5,17 @@ import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import ProjectsProvider from './providers/ProjectsProvider';
 import TagsProvider from './providers/TagsProvider';
+import { ThemeProvider } from 'styled-components';
+import theme from './theme';
 
 ReactDOM.render(
-  <ProjectsProvider>
-    <TagsProvider>
-      <App />
-    </TagsProvider>
-  </ProjectsProvider>,
+  <ThemeProvider theme={theme}>
+    <ProjectsProvider>
+      <TagsProvider>
+        <App />
+      </TagsProvider>
+    </ProjectsProvider>
+  </ThemeProvider>,
   document.getElementById('root')
 );
 

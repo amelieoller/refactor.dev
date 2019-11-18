@@ -17,12 +17,12 @@ const StyledInput = styled.div`
     width: 100%;
     padding: 0.4rem 0.8rem;
     border: 1px solid #c5c5c5;
-    color: #50514f;
+    color: background: ${props => props.theme.text};
   }
 
   input:focus {
-    border-color: #776eff87;
-    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px #776eff87;
+    border-color: ${props => props.theme.primary}87;
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px ${props => props.theme.primary}87;
     outline: 0 none;
   }
 `;
