@@ -1,47 +1,54 @@
 import React from 'react';
 import styled from 'styled-components';
-import placeholder from '../../../assets/images/placeholder.png';
 import PropTypes from 'prop-types';
 import { firestore } from '../../../firebase';
+import { ReactComponent as Trash } from '../../../assets/icons/trash.svg';
+import { ReactComponent as Edit } from '../../../assets/icons/edit.svg';
 
 const StyledProject = styled.div`
   background: white;
   color: #50514f;
-  box-shadow: 0 4px 10px 1px rgba(0, 0, 0, 0.14),
-    0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
   display: grid;
-  grid-template-rows: 180px auto;
+  grid-template-rows: 270px auto;
+  border: 1px solid #c5c5c5;
 
   .project-image {
     background-image: ${props => `url(${props.image})`};
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     position: relative;
     border-radius: 0.6rem 0.6rem 0px 0px;
   }
 
-  .project-image::after {
-    content: '';
-    border-radius: 0.6rem 0.6rem 0px 0px;
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: #9adce942;
-  }
-
   .content {
-    padding: 1.4rem;
+    padding-top: 1.9rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     .main {
-      h3,
-      p {
+      h3 {
         margin: 0;
         margin-bottom: 0.5rem;
+        line-height: 3rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+
+        a {
+          text-decoration: none;
+        }
+      }
+
+      p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
       }
 
       h3 {
@@ -53,7 +60,6 @@ const StyledProject = styled.div`
 
       .tags {
         span {
-          /* margin-right: 0.4rem; */
           font-style: italic;
           color: #aeaeae;
         }
@@ -62,32 +68,47 @@ const StyledProject = styled.div`
 
     .footer {
       margin-top: 1rem;
+      text-align: right;
+
+      a {
+        color: inherit;
+      }
+
+      svg {
+        margin-left: 0.5rem;
+        cursor: pointer;
+      }
 
       .button {
         margin-right: 0.3rem;
       }
     }
   }
+
+  @media (max-width: 650px) {
+    border: none;
+  }
 `;
 
 function Project({ project }) {
   const handleDelete = id => {
-    // const { projects } = this.state;
     firestore.doc(`projects/${id}`).delete();
-
-    // await firestore.doc(`projects/${id}`).delete();
-    // const filteredProjects = projects.filter(project => project.id !== id);
-    // this.setState({ projects: filteredProjects });
   };
 
   return (
-    <StyledProject image={project.image ? project.image : placeholder}>
+    <StyledProject
+      image={
+        project.image
+          ? project.image
+          : 'https://res.cloudinary.com/dpekucrvb/image/upload/v1573953781/undraw_insert_block_efyb.svg'
+      }
+    >
       <div className="project-image"></div>
       {/* <img src={project.image ? project.image : placeholder} alt="" /> */}
       <div className="content">
         <div className="main">
           <h3>
-            <a target="_blank" href={project.github}>
+            <a target="_blank" rel="noopener noreferrer" href={project.github}>
               {project.title}
             </a>
           </h3>
@@ -101,18 +122,14 @@ function Project({ project }) {
         </div>
 
         <div className="footer">
-          <a className="button primary" href={`/projects/${project.id}`}>
-            Edit
+          <a href={`/projects/${project.id}/edit`}>
+            <Edit />
           </a>
-
-          <a
-            className="button delete"
+          <Trash
             onClick={() => {
               if (window.confirm('Are you sure?')) handleDelete(project.id);
             }}
-          >
-            Delete
-          </a>
+          />
         </div>
       </div>
     </StyledProject>
