@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Home } from '../../../assets/icons/home.svg';
 import Form from '../Form';
-import Title from '../../Title';
+import Header from '../../Header';
 import { firestore } from '../../../firebase';
 import { collectIdsAndData } from '../../../utils/utilities';
+import { Link } from 'react-router-dom';
 
 const StyledEditProject = styled.div``;
 
@@ -28,9 +29,11 @@ const EditProject = ({ match }) => {
 
   return (
     <StyledEditProject>
-      <Title titleText="Edit Project" link="/">
-        <Home />
-      </Title>
+      <Header titleText="Edit Project">
+        <Link to="/">
+          <Home />
+        </Link>
+      </Header>
       <Form existingProject={project} />
     </StyledEditProject>
   );

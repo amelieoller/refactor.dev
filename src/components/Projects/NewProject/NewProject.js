@@ -2,16 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Home } from '../../../assets/icons/home.svg';
 import Form from '../Form';
-import Title from '../../Title';
+import Header from '../../Header';
+import { Link } from 'react-router-dom';
 
 const StyledNewProject = styled.div``;
 
 function NewProject() {
   return (
     <StyledNewProject>
-      <Title titleText="New Project" link="/">
-        <Home />
-      </Title>
+      <Header titleText="New Project">
+        <Link to="/">
+          <Home />
+        </Link>
+      </Header>
       <Form />
     </StyledNewProject>
   );
