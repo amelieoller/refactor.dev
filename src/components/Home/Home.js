@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
 import Projects from '../Projects/Projects';
 import Filter from '../Filter';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
-import SingleProject from '../Projects/SingleProject';
 
 const StyledHome = styled.div`
   .header {
@@ -47,27 +46,16 @@ const StyledHome = styled.div`
   }
 `;
 
-const Home = () => {
-  const [selectedProject, setSelectedProject] = useState(null);
-
-  const selectProject = project => {
-    selectedProject ? setSelectedProject(null) : setSelectedProject(project);
-  };
-
-  return (
-    <StyledHome>
-      <Header titleText="Project Keeper">
-        <Link to="/new-project">
-          <Plus />
-        </Link>
-      </Header>
-      <Filter />
-      {selectedProject && (
-        <SingleProject project={selectedProject} selectProject={selectProject} />
-      )}
-      <Projects selectProject={selectProject} />
-    </StyledHome>
-  );
-};
+const Home = () => (
+  <StyledHome>
+    <Header titleText="Project Keeper">
+      <Link to="/new-project">
+        <Plus />
+      </Link>
+    </Header>
+    <Filter />
+    <Projects />
+  </StyledHome>
+);
 
 export default Home;

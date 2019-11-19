@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import Project from './Project';
 import { ProjectsContext } from '../../providers/ProjectsProvider';
-import PropTypes from 'prop-types';
 
 const StyledProjects = styled.div`
   display: grid;
@@ -12,12 +11,12 @@ const StyledProjects = styled.div`
 
   @media (max-width: 750px) {
     grid-template-columns: 1fr;
+    grid-gap: 0;
 
     & > div {
-      padding: 0 3rem;
+      padding: 2rem 0;
 
       &:nth-child(odd) {
-        padding: 3.5rem;
         background: ${props => props.theme.primaryBackground};
 
         .tags > span {
@@ -28,20 +27,36 @@ const StyledProjects = styled.div`
   }
 `;
 
-const Projects = ({ selectProject }) => {
+const Projects = () => {
   const { projects } = useContext(ProjectsContext);
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  const selectProject = project => {
+    if (project && (!selectedProject || selectedProject.id !== project.id)) {
+      // If there is a project AND no selected project yet, or the newly selected project is different from the previous one, set the selected project
+      setSelectedProject(project);
+    } else {
+      // If there is a selected project that needs to be removed
+      setSelectedProject(null);
+    }
+  };
 
   return (
-    <StyledProjects>
-      {projects.map(project => (
-        <Project key={project.id} project={project} selectProject={selectProject} />
-      ))}
-    </StyledProjects>
+    <>
+      <StyledProjects>
+        {projects.map(project => (
+          <Project
+            key={project.id}
+            project={project}
+            selectProject={selectProject}
+            selectedProject={selectedProject}
+          />
+        ))}
+      </StyledProjects>
+    </>
   );
 };
 
-Projects.propTypes = {
-  selectProject: PropTypes.func.isRequired
-};
+Projects.propTypes = {};
 
 export default Projects;

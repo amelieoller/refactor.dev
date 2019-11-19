@@ -8,7 +8,7 @@ const StyledSingleProject = styled.div``;
 const SingleProject = ({ project, selectProject }) => {
   return (
     <StyledSingleProject>
-      <Button onClick={selectProject}>Remove Selection</Button>
+      <Button onClick={() => selectProject(null)}>Remove Selection</Button>
       <Project project={project} />
     </StyledSingleProject>
   );
