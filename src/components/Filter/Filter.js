@@ -23,7 +23,7 @@ const StyledFilter = styled.div`
     }
 
     &:hover {
-      background: #675dfc;
+      background: ${props => props.theme.primaryDark};
       color: white;
     }
   }
