@@ -17,7 +17,7 @@ const StyledInput = styled.div`
     width: 100%;
     padding: 0.4rem 0.8rem;
     border: 1px solid #c5c5c5;
-    color: background: ${props => props.theme.text};
+    color: ${props => props.theme.text};
   }
 
   input:focus {

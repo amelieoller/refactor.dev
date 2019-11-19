@@ -17,7 +17,7 @@ const StyledCheckbox = styled.div`
 
     &:hover,
     &:active {
-      color: background: ${props => props.theme.text};
+      color: ${props => props.theme.text};
     }
 
     &:hover .helper {
