@@ -6,16 +6,18 @@ import { ReactComponent as Trash } from '../../../assets/icons/trash.svg';
 import { ReactComponent as Edit } from '../../../assets/icons/edit.svg';
 import { ReactComponent as GitHub } from '../../../assets/icons/github.svg';
 import { ReactComponent as Monitor } from '../../../assets/icons/monitor.svg';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 const StyledProject = styled.div`
   background: white;
-  color: background: ${props => props.theme.text};
+  color: ${props => props.theme.text};
   display: grid;
   grid-template-rows: 270px auto;
   border: 1px solid #c5c5c5;
-  padding: 3.5rem;
+  transition: all 0.8s ease;
 
   .project-image {
+    margin: 3.5rem 3.5rem 0 3.5rem;
     background-image: ${props => `url(${props.image})`};
     background-size: contain;
     background-repeat: no-repeat;
@@ -31,6 +33,8 @@ const StyledProject = styled.div`
     justify-content: space-between;
 
     .main {
+      margin: 0 3.5rem;
+
       h3 {
         margin: 0;
         margin-bottom: 0.5rem;
@@ -41,8 +45,13 @@ const StyledProject = styled.div`
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
 
-        a {
-          text-decoration: none;
+        &.more-info-link {
+          text-decoration: underline;
+          cursor: pointer;
+
+          &:hover {
+            color: ${props => props.theme.primary};
+          }
         }
       }
 
@@ -68,9 +77,19 @@ const StyledProject = styled.div`
       }
     }
 
+    .extra-information {
+      margin: 3rem 0 1rem 0;
+
+      img {
+        border-top: 1px solid #c5c5c5;
+        border-bottom: 1px solid #c5c5c5;
+        width: 100%;
+      }
+    }
+
     .footer {
-      margin-top: 2rem;
       text-align: right;
+      margin: 2rem 3.5rem 3.5rem 3.5rem;
 
       a {
         color: inherit;
@@ -92,12 +111,31 @@ const StyledProject = styled.div`
     }
   }
 
+  /* Addition image transition */
+  .info-enter {
+    opacity: 0.01;
+  }
+
+  .info-enter.info-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+
+  .info-leave {
+    opacity: 1;
+  }
+
+  .info-leave.info-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }
+
   @media (max-width: 750px) {
     border: none;
   }
 `;
 
-const Project = ({ project, selectProject }) => {
+const Project = ({ project, selectProject, selectedProject }) => {
   const handleDelete = id => {
     firestore.doc(`projects/${id}`).delete();
   };
@@ -113,7 +151,12 @@ const Project = ({ project, selectProject }) => {
       <div className="project-image"></div>
       <div className="content">
         <div className="main">
-          <h3 onClick={() => selectProject(project)}>{project.title} </h3>
+          <h3
+            className={project.additionalImage ? 'more-info-link' : ''}
+            onClick={() => project.additionalImage && selectProject(project)}
+          >
+            {project.title}
+          </h3>
           <p>{project.description}</p>
 
           <div className="tags">
@@ -122,6 +165,18 @@ const Project = ({ project, selectProject }) => {
             ))}
           </div>
         </div>
+
+        <CSSTransitionGroup
+          transitionName="info"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}
+        >
+          {selectedProject && selectedProject.id === project.id && (
+            <div className="extra-information">
+              <img src={project.additionalImage} alt="" />
+            </div>
+          )}
+        </CSSTransitionGroup>
 
         <div className="footer">
           {project.github && (
