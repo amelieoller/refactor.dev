@@ -12,7 +12,8 @@ const StyledButton = styled.button`
   cursor: pointer;
   display: flex;
   align-items: center;
-  background: ${props => (props.full ? props.theme.primary : 'transparent')};
+  background: ${props =>
+    props.full ? props.theme.primary : props.theme.transparentWhite};
 
   svg {
     margin-right: 0.5rem;

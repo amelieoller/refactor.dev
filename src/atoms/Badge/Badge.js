@@ -7,12 +7,15 @@ const StyledBadge = styled.span`
   font-size: 1.4rem;
   border-radius: 0.3rem;
   padding: 0.2rem 1rem;
+  cursor: pointer;
   border: 1px solid
     ${props => (props.isSelected ? props.theme.primaryDark : props.theme.lighterGrey)};
   color: ${props => (props.isSelected ? 'white' : props.theme.darkerGrey)};
-  cursor: pointer;
   background: ${props =>
     props.isSelected ? props.theme.primary : props.theme.lightestGrey};
+  /* border: 1px solid ${props => props.theme.primaryDark};
+  color: ${props => props.theme.darkerGrey};
+  background: ${props => props.theme.lightestGrey}; */
 
   &:hover {
     background: ${({ theme }) => theme.primary};
@@ -21,9 +24,9 @@ const StyledBadge = styled.span`
   }
 `;
 
-const Badge = ({ badgeText, handleSelect, isSelected, className }) => {
+const Badge = ({ badgeText, handleClick, isSelected, className }) => {
   return (
-    <StyledBadge isSelected={isSelected} onClick={handleSelect} className={className}>
+    <StyledBadge isSelected={isSelected} onClick={handleClick} className={className}>
       {badgeText}
     </StyledBadge>
   );
@@ -35,7 +38,7 @@ Badge.defaultProps = {
 
 Badge.propTypes = {
   badgeText: PropTypes.string.isRequired,
-  handleSelect: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
   isSelected: PropTypes.bool.isRequired,
   className: PropTypes.string
 };
