@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 import './index.scss';
 import UserProvider from './providers/UserProvider';
+import ErrorProvider from './providers/ErrorProvider';
 import theme from './theme';
 import Authentication from './components/Authentication';
 
@@ -13,7 +14,9 @@ ReactDOM.render(
   <Router>
     <ThemeProvider theme={theme}>
       <UserProvider>
-        <Authentication />
+        <ErrorProvider>
+          <Authentication />
+        </ErrorProvider>
       </UserProvider>
     </ThemeProvider>
   </Router>,

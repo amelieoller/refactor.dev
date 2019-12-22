@@ -23,31 +23,39 @@ export const provider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 export const signOut = () => auth.signOut();
 
-export const signUpWithUsernameAndPassword = (email, password) =>
-  auth.createUserWithEmailAndPassword(email, password).catch(function(error) {
-    // Handle Errors here.
-    console.log(error);
+export const signUpWithUsernameAndPassword = (email, password, setError) =>
+  auth
+    .createUserWithEmailAndPassword(email, password)
+    .then(() => {
+      setError(null);
 
-    var credential = firebase.auth.EmailAuthProvider.credential(email, password);
-    firebase
-      .auth()
-      .currentUser.linkWithCredential(credential)
-      .then(
-        function(usercred) {
-          var user = usercred.user;
-          console.log('Account linking success', user);
-        },
-        function(error) {
-          console.log('Account linking error', error);
-        }
-      );
-  });
+      var credential = firebase.auth.EmailAuthProvider.credential(email, password);
+      firebase
+        .auth()
+        .currentUser.linkWithCredential(credential)
+        .then(
+          function(usercred) {
+            var user = usercred.user;
+            console.log('Account linking success', user);
+          },
+          function(error) {
+            console.log('Account linking error', error);
+          }
+        );
+    })
+    .catch(function(error) {
+      setError(error);
+    });
 
-export const signInWithUsernameAndPassword = (email, password) =>
-  auth.signInWithEmailAndPassword(email, password).catch(function(error) {
-    // Handle Errors here.
-    console.log(error);
-  });
+export const signInWithUsernameAndPassword = (email, password, setError) =>
+  auth
+    .signInWithEmailAndPassword(email, password)
+    .then(() => {
+      setError(null);
+    })
+    .catch(function(error) {
+      setError(error);
+    });
 
 export const createUserProfileDocument = async user => {
   if (!user) return;
@@ -87,6 +95,7 @@ export const getUserDocument = async uid => {
     console.error('Error fetching user', error.message);
   }
 };
-window.firebase = firebase;
+
+// window.firebase = firebase;
 
 export default firebase;
