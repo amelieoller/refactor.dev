@@ -6,7 +6,7 @@ import { firestore } from '../../firebase';
 import { ReactComponent as Check } from '../../assets/icons/check.svg';
 import Button from '../../atoms/Button';
 import Input from '../../atoms/Input';
-import withUser from '../withUser';
+import withUser from '../../hocs/withUser';
 import Tags from './Tags';
 
 const StyledForm = styled.div`

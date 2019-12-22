@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import NewProject from '../NewProject';
 import Home from '../../containers/Home';
 import EditProject from '../EditProject';
-import withUser from '../withUser';
+import withUser from '../../hocs/withUser';
 import Login from '../Login';
 import routes from '../../constants/routes';
 import UserPortfolio from '../../containers/UserPortfolio';

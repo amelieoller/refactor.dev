@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { firestore } from '../../firebase';
 import { ReactComponent as Star } from '../../assets/icons/star.svg';
 import Footer from './Footer';
-import withUser from '../withUser';
+import withUser from '../../hocs/withUser';
 
 const StyledProject = styled.div`
   background: ${({ theme }) => theme.transparentWhite};
