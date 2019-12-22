@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
 import { firestore } from '../../firebase';
-import { ReactComponent as Check } from '../../../assets/icons/check.svg';
+import { ReactComponent as Check } from '../../assets/icons/check.svg';
 import Button from '../../atoms/Button';
 import Input from '../../atoms/Input';
 import withUser from '../withUser';
@@ -83,7 +83,7 @@ const Form = ({ existingProject, history, titleText, user }) => {
 
   useEffect(() => {
     !!existingProject && setProject({ ...initialProjectState, ...existingProject });
-  }, [existingProject]);
+  }, [existingProject, initialProjectState]);
 
   const handleChange = e => {
     const { name, value } = e.target;
