@@ -9,6 +9,9 @@ const StyledNoProjects = styled.div`
   text-align: center;
   padding: 4rem;
   background: ${({ theme }) => theme.transparentWhite};
+  margin-top: 20vh;
+  border: ${({ theme }) => theme.border};
+  border-radius: ${({ theme }) => theme.sizes.borderRadius};
 `;
 
 const UserPortfolio = ({ location }) => {

@@ -13,14 +13,13 @@ import TitleBar from '../components/TitleBar';
 import withUser from '../components/withUser';
 
 const StyledApp = styled.div`
-  padding: 8rem;
+  padding: 2rem 8rem 8rem 8rem;
   height: 100%;
   max-width: 195rem;
   margin: 0 auto;
 
   @media (max-width: 550px) {
     padding: 0;
-    padding-top: 5rem;
   }
 `;
 
