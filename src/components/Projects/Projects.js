@@ -1,23 +1,39 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
-import Project from './Project';
+
 import { ProjectsContext } from '../../providers/ProjectsProvider';
+import Project from '../Project';
 
 const StyledProjects = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: ${props =>
+    props.starred ? '1fr 1fr' : 'repeat(auto-fill, minmax(360px, 1fr))'};
   grid-gap: 5rem;
-  margin-top: 4rem;
+  margin-top: 3rem;
 
-  @media (max-width: 750px) {
+  @media (max-width: 1300px) {
+    grid-template-columns: ${props => props.starred && '1fr'};
+  }
+
+  @media (max-width: 550px) {
     grid-template-columns: 1fr;
     grid-gap: 0;
 
     & > div {
-      padding: 2rem 0;
-
       &:nth-child(odd) {
-        background: ${props => props.theme.primaryBackground};
+        background: ${({ theme }) => theme.primaryBackground};
+
+        .star-container {
+          path {
+            color: white;
+          }
+        }
+
+        .footer {
+          svg {
+            color: white;
+          }
+        }
 
         .tags > span {
           color: white;
@@ -27,31 +43,46 @@ const StyledProjects = styled.div`
   }
 `;
 
-const Projects = () => {
-  const { projects } = useContext(ProjectsContext);
-  const [selectedProject, setSelectedProject] = useState(null);
+const Projects = ({ projects, noAccess }) => {
+  const { selectedSort } = useContext(ProjectsContext);
+  const [projectOpenId, setProjectOpenId] = useState(null);
+  let otherProjects = projects;
 
-  const selectProject = project => {
-    if (project && (!selectedProject || selectedProject.id !== project.id)) {
-      // If there is a project AND no selected project yet, or the newly selected project is different from the previous one, set the selected project
-      setSelectedProject(project);
-    } else {
-      // If there is a selected project that needs to be removed
-      setSelectedProject(null);
-    }
-  };
+  if (selectedSort === 'starred') {
+    otherProjects = projects && projects.filter(project => !project.starred);
+  }
 
   return (
     <>
+      {selectedSort === 'starred' && (
+        <StyledProjects starred={true}>
+          {projects &&
+            projects
+              .filter(project => project.starred)
+              .map(project => (
+                <Project
+                  key={project.id}
+                  project={project}
+                  projectOpenId={projectOpenId}
+                  setProjectOpenId={setProjectOpenId}
+                  selectedSort={selectedSort}
+                  noAccess={noAccess}
+                />
+              ))}
+        </StyledProjects>
+      )}
+
       <StyledProjects>
-        {projects.map(project => (
-          <Project
-            key={project.id}
-            project={project}
-            selectProject={selectProject}
-            selectedProject={selectedProject}
-          />
-        ))}
+        {otherProjects &&
+          otherProjects.map(project => (
+            <Project
+              key={project.id}
+              project={project}
+              projectOpenId={projectOpenId}
+              setProjectOpenId={setProjectOpenId}
+              selectedSort={selectedSort}
+            />
+          ))}
       </StyledProjects>
     </>
   );
