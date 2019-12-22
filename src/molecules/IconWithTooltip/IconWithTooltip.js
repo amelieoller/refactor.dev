@@ -56,6 +56,12 @@ const IconWithTooltip = ({
 
   if (onClickFunc) {
     iconWithLink = <a onClick={() => onClickFunc()}>{icon}</a>;
+  } else if (external) {
+    iconWithLink = (
+      <a target="_blank" href={linkTo}>
+        {icon}
+      </a>
+    );
   } else {
     iconWithLink = <Link to={linkTo}>{icon}</Link>;
   }
