@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as Home } from '../../../assets/icons/home.svg';
+
 import Form from '../Form';
-import Header from '../../Header';
-import { firestore } from '../../../firebase';
-import { collectIdsAndData } from '../../../utils/utilities';
-import { Link } from 'react-router-dom';
+import { firestore } from '../../firebase';
+import { collectIdsAndData } from '../../utils/utilities';
+import Loading from '../../atoms/Loading';
+import withUser from '../withUser'
 
 const StyledEditProject = styled.div``;
 
-const EditProject = ({ match }) => {
+const EditProject = ({ match, user }) => {
   const { projectId } = match.params;
   const [project, setProject] = useState();
 
   useEffect(() => {
     async function fetchData() {
       const snapshot = await firestore
+        .collection('users')
+        .doc(user.uid)
         .collection('projects')
         .doc(projectId)
         .get();
@@ -25,18 +27,17 @@ const EditProject = ({ match }) => {
       setProject(project);
     }
     fetchData();
-  }, [projectId]);
+  }, [projectId, user]);
 
   return (
     <StyledEditProject>
-      <Header titleText="Edit Project">
-        <Link to="/">
-          <Home />
-        </Link>
-      </Header>
-      <Form existingProject={project} />
+      {project ? (
+        <Form existingProject={project} titleText={`Edit ${project.title}`} />
+      ) : (
+        <Loading />
+      )}
     </StyledEditProject>
   );
 };
 
-export default EditProject;
+export default withUser(EditProject);
