@@ -4,9 +4,9 @@ import { withRouter } from 'react-router-dom';
 import { auth, createUserProfileDocument, firestore } from '../firebase';
 import { collectIdsAndData } from '../utils/utilities';
 
-export const ProjectsContext = createContext();
+export const UserContext = createContext();
 
-const ProjectsProvider = ({ children }) => {
+const UserProvider = ({ children }) => {
   const [projects, setProjects] = useState(null);
   const [filter, setFilter] = useState({ tags: [] });
   const [sortBy, setSortBy] = useState('starred');
@@ -124,7 +124,7 @@ const ProjectsProvider = ({ children }) => {
   const filteredProjects = projects && applyFilterAndSort(projects, filter, sortBy);
 
   return (
-    <ProjectsContext.Provider
+    <UserContext.Provider
       value={{
         projects: filteredProjects,
         updateFilter: updateFilter,
@@ -136,8 +136,8 @@ const ProjectsProvider = ({ children }) => {
       }}
     >
       {children}
-    </ProjectsContext.Provider>
+    </UserContext.Provider>
   );
 };
 
-export default withRouter(ProjectsProvider);
+export default withRouter(UserProvider);

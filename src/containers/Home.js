@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 
 import Projects from '../components/Projects';
 import Filter from '../components/Filter';
-import { ProjectsContext } from '../providers/ProjectsProvider';
+import { UserContext } from '../providers/UserProvider';
 
 const Home = () => {
-  const { projects } = useContext(ProjectsContext);
+  const { projects } = useContext(UserContext);
 
   return (
     <>
