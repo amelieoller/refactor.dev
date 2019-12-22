@@ -1,21 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
-import App from './components/App';
-import * as serviceWorker from './serviceWorker';
-import ProjectsProvider from './providers/ProjectsProvider';
-import TagsProvider from './providers/TagsProvider';
 import { ThemeProvider } from 'styled-components';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import * as serviceWorker from './serviceWorker';
+import './index.scss';
+import ProjectsProvider from './providers/ProjectsProvider';
 import theme from './theme';
+import Authentication from './components/Authentication';
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <ProjectsProvider>
-      <TagsProvider>
-        <App />
-      </TagsProvider>
-    </ProjectsProvider>
-  </ThemeProvider>,
+  <Router>
+    <ThemeProvider theme={theme}>
+      <ProjectsProvider>
+        <Authentication />
+      </ProjectsProvider>
+    </ThemeProvider>
+  </Router>,
   document.getElementById('root')
 );
 
