@@ -7,8 +7,10 @@
     "node-sass": "^4.13.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-dropdown": "^1.6.4",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
+    "react-tooltip": "^3.11.1",
     "react-transition-group": "1.x",
     "styled-components": "^4.4.0"
   },
@@ -37,5 +39,10 @@
     "@testing-library/react": "^9.3.0",
     "cypress": "^3.4.1",
     "faker": "^4.1.0"
+  },
+  "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "src/{name}",
+    "packageManager": "yarn"
   }
 }
