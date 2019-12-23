@@ -7,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import './index.scss';
 import UserProvider from './providers/UserProvider';
 import ErrorProvider from './providers/ErrorProvider';
+import ImageProvider from './providers/ImageProvider';
 import theme from './theme';
 import Authentication from './components/Authentication';
 
@@ -15,7 +16,9 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <UserProvider>
         <ErrorProvider>
-          <Authentication />
+          <ImageProvider>
+            <Authentication />
+          </ImageProvider>
         </ErrorProvider>
       </UserProvider>
     </ThemeProvider>

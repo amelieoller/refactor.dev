@@ -6,6 +6,7 @@ import { firestore } from '../../firebase';
 import { ReactComponent as Star } from '../../assets/icons/star.svg';
 import Footer from './Footer';
 import withUser from '../../hocs/withUser';
+import withImages from '../../hocs/withImages';
 
 const StyledProject = styled.div`
   background: ${({ theme }) => theme.transparentWhite};
@@ -130,7 +131,8 @@ const Project = ({
   setProjectOpenId,
   selectedSort,
   user,
-  noAccess
+  noAccess,
+  images
 }) => {
   const handleDelete = id => {
     firestore.doc(`users/${user.uid}/projects/${id}`).delete();
@@ -164,9 +166,9 @@ const Project = ({
 
       <ProjectImageTop
         image={
-          project.image
-            ? project.image
-            : 'https://res.cloudinary.com/dpekucrvb/image/upload/v1573953781/undraw_insert_block_efyb.svg'
+          project.image && images[project.image]
+            ? images[project.image]
+            : images['default.svg']
         }
         starred={isStarred}
         onClick={expandCard}
@@ -208,4 +210,4 @@ Project.propTypes = {
   })
 };
 
-export default withUser(Project);
+export default withUser(withImages(Project));

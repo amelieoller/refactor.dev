@@ -6,8 +6,10 @@ import { firestore } from '../../firebase';
 import { ReactComponent as Check } from '../../assets/icons/check.svg';
 import Button from '../../atoms/Button';
 import Input from '../../atoms/Input';
-import withUser from '../../hocs/withUser';
 import Tags from './Tags';
+import withUser from '../../hocs/withUser';
+import withImages from '../../hocs/withImages';
+import { twoFlatArraysAreEqual } from '../../utils/utilities';
 
 const StyledForm = styled.div`
   position: relative;
@@ -58,32 +60,104 @@ const StyledForm = styled.div`
     grid-column: span 2;
 
     .submit-button {
-      text-align: center;
+      display: flex;
+      align-items: center;
+
+      .messages {
+        display: flex;
+        flex-direction: column;
+        margin-left: 2rem;
+        font-size: 1.2rem;
+        justify-content: space-around;
+        height: 3.5rem;
+
+        .discard-link {
+          cursor: pointer;
+          text-decoration: underline;
+          color: ${({ theme }) => theme.primaryLight};
+
+          &:hover {
+            color: ${({ theme }) => theme.text};
+          }
+        }
+
+        .error {
+          color: ${({ theme }) => theme.primaryBackground};
+          font-style: italic;
+        }
+      }
     }
   }
 `;
 
-const Form = ({ existingProject, history, titleText, user }) => {
+const AdditionalImages = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  height: 200px;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1rem;
+  cursor: pointer;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .image-wrap:last-child img {
+    margin-right: 2.5rem;
+  }
+
+  .image-wrap {
+    flex: 0 0 auto;
+    margin-right: 1rem;
+    height: 200px;
+
+    img {
+      border: ${({ theme }) => theme.border};
+
+      height: 100%;
+      width: auto;
+
+      &.selected {
+        border: 2px solid ${({ theme }) => theme.primaryBackground};
+      }
+    }
+  }
+`;
+
+const LeftForm = styled.div`
+  overflow-x: auto;
+`;
+
+const Form = ({ existingProject, history, titleText, user, images }) => {
   const initialProjectState = {
     title: '',
     description: '',
     github: '',
     folder: '',
-    image: '',
+    image: 'default.svg',
     additionalImage: '',
     server: '',
     live: '',
-    starred: true,
+    starred: false,
     tags: [],
     updated: new Date(),
     userUid: user.uid
   };
 
   const [project, setProject] = useState(initialProjectState);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    !!existingProject && setProject({ ...initialProjectState, ...existingProject });
-  }, [existingProject, initialProjectState]);
+    resetProject();
+  }, [existingProject]);
+
+  const resetProject = () => {
+    !!existingProject
+      ? setProject({ ...initialProjectState, ...existingProject })
+      : setProject(initialProjectState);
+  };
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -94,9 +168,15 @@ const Form = ({ existingProject, history, titleText, user }) => {
     e.preventDefault();
 
     if (project.title) {
-      history.push('/');
+      if (!compareProjects()) {
+        // if projects are different
+        project.id ? handleUpdate() : handleCreate();
+      }
 
-      project.id ? handleUpdate() : handleCreate();
+      history.push('/');
+    } else {
+      // if project doesn't have a title
+      setError('Project needs to have title.');
     }
   };
 
@@ -112,12 +192,29 @@ const Form = ({ existingProject, history, titleText, user }) => {
       .update({ ...project, updated });
   };
 
+  const compareProjects = () => {
+    let initialProject = existingProject ? existingProject : initialProjectState;
+
+    const attributes = [
+      'title',
+      'description',
+      'github',
+      'folder',
+      'image',
+      'server',
+      'live'
+    ];
+
+    const attrCompare = attributes.every(attr => project[attr] === initialProject[attr]);
+    return attrCompare && twoFlatArraysAreEqual(project.tags, initialProject.tags);
+  };
+
   return (
     <StyledForm>
       <h2>{titleText}</h2>
 
       <form onSubmit={handleSubmit}>
-        <div>
+        <LeftForm>
           <Input
             onChange={handleChange}
             value={project.title}
@@ -126,6 +223,7 @@ const Form = ({ existingProject, history, titleText, user }) => {
             type="text"
             title="Title"
           />
+
           <Input
             onChange={handleChange}
             value={project.description}
@@ -134,6 +232,7 @@ const Form = ({ existingProject, history, titleText, user }) => {
             type="textarea"
             title="Description"
           />
+
           <Input
             onChange={handleChange}
             value={project.github}
@@ -142,14 +241,7 @@ const Form = ({ existingProject, history, titleText, user }) => {
             title="GitHub URL"
             type="text"
           />
-          <Input
-            onChange={handleChange}
-            value={project.image}
-            name="image"
-            placeholder="Image"
-            title="Image"
-            type="text"
-          />
+
           <Input
             onChange={handleChange}
             value={project.live && project.live}
@@ -158,7 +250,25 @@ const Form = ({ existingProject, history, titleText, user }) => {
             title="Live Site"
             type="text"
           />
-        </div>
+
+          <AdditionalImages>
+            {images &&
+              Object.keys(images).map(imageKey => (
+                <div
+                  key={imageKey}
+                  className="image-wrap"
+                  onClick={() => {
+                    setProject({ ...project, image: imageKey });
+                  }}
+                >
+                  <img
+                    src={images[imageKey]}
+                    className={imageKey === project.image ? 'selected' : ''}
+                  />
+                </div>
+              ))}
+          </AdditionalImages>
+        </LeftForm>
 
         <Tags project={project} setProject={setProject} user={user} />
 
@@ -169,6 +279,26 @@ const Form = ({ existingProject, history, titleText, user }) => {
               <Check />
               Submit
             </Button>
+
+            <div className="messages">
+              {!compareProjects() && (
+                <span
+                  className="discard-link"
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        "Are you sure? This will wipe out any changes you've made so far."
+                      )
+                    )
+                      resetProject();
+                  }}
+                >
+                  Discard Changes
+                </span>
+              )}
+
+              {error && !project.title && <span className="error">{error}</span>}
+            </div>
           </div>
         </div>
       </form>
@@ -176,4 +306,4 @@ const Form = ({ existingProject, history, titleText, user }) => {
   );
 };
 
-export default withUser(withRouter(Form));
+export default withUser(withImages(withRouter(Form)));
