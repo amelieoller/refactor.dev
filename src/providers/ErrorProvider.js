@@ -1,7 +1,4 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
-
-import { auth, createUserProfileDocument, firestore } from '../firebase';
 
 export const ErrorContext = createContext();
 

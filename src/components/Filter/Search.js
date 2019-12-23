@@ -228,7 +228,7 @@ const Search = () => {
       <div className="selected-tags">
         {selectedTags.length !== 0 &&
           selectedTags.map(tag => {
-            debugger;
+
             return (
               <Badge
                 className="tag"
