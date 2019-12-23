@@ -1,37 +1,28 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-import { storage } from '../firebase';
-
 export const ImageContext = createContext();
 
 const ImageProvider = ({ children }) => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    const storageRef = storage.ref('unDraw');
-
-    storageRef
-      .listAll()
-      .then(result => {
-        result.items.forEach(imageRef => {
-          imageRef
-            .getDownloadURL()
-            .then(url => {
-              setImages(prevState => {
-                return [...prevState, url];
-              });
-            })
-            .catch(error => {
-              console.log(error);
-              // Handle any errors
-            });
-        });
-      })
-      .catch(function(error) {
-        // Handle any errors
-        console.log(error);
+    const importAll = r => {
+      let images = {};
+      r.keys().map((item, index) => {
+        images[item.replace('./', '')] = r(item);
       });
+
+      return images;
+    };
+
+    const importedImages = importAll(
+      require.context('../assets/unDraw', false, /\.(png|svg)$/)
+    );
+
+    setImages(importedImages);
   }, []);
+
+  console.log('images:', images);
 
   return (
     <ImageContext.Provider
