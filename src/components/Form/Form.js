@@ -9,7 +9,7 @@ import Input from '../../atoms/Input';
 import Tags from './Tags';
 import withUser from '../../hocs/withUser';
 import withImages from '../../hocs/withImages';
-import { twoFlatArraysAreEqual } from '../../utils/utilities';
+import { twoFlatArraysAreEqual, moveArrayItem } from '../../utils/utilities';
 
 const StyledForm = styled.div`
   position: relative;
@@ -253,7 +253,11 @@ const Form = ({ existingProject, history, titleText, user, images }) => {
 
           <AdditionalImages>
             {images &&
-              Object.keys(images).map(imageKey => (
+              moveArrayItem(
+                Object.keys(images),
+                Object.keys(images).indexOf(project.image),
+                0
+              ).map(imageKey => (
                 <div
                   key={imageKey}
                   className="image-wrap"
