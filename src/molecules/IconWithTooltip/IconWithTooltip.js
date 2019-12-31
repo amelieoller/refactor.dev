@@ -22,12 +22,12 @@ const StyledIconWithTooltip = styled.span`
 
   svg {
     cursor: pointer;
-    color: ${({ theme }) => theme.lightGrey};
+    color: ${({ theme }) => theme.primaryLight};
 
     &.active,
     &:hover {
       transition: all ${({ theme }) => theme.transitions.ease};
-      color: ${({ theme }) => theme.darkerGrey};
+      color: ${({ theme }) => theme.primary};
     }
   }
 `;
@@ -58,7 +58,7 @@ const IconWithTooltip = ({
     iconWithLink = <a onClick={() => onClickFunc()}>{icon}</a>;
   } else if (external) {
     iconWithLink = (
-      <a target="_blank" href={linkTo}>
+      <a target="_blank" rel="noopener noreferrer" href={linkTo}>
         {icon}
       </a>
     );
