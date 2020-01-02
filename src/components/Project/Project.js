@@ -47,7 +47,7 @@ const StyledStar = styled.span`
   &:hover svg {
     transition: all ${({ theme }) => theme.transitions.ease};
     fill: ${props => (props.starred ? 'transparent' : props.theme.primaryLight)};
-    color: ${({theme}) => theme.primaryLight} !important;
+    color: ${({ theme }) => theme.primaryLight} !important;
   }
 `;
 
@@ -159,8 +159,12 @@ const Project = ({
   return (
     <StyledProject starred={isStarred}>
       {!noAccess && (
-        <StyledStar starred={isStarred} className="star-container" data-tip={isStarred ? 'Un-Star Project' : "Star Project"}>
-        <Star onClick={handleStarClick} />
+        <StyledStar
+          starred={project.starred}
+          className="star-container"
+          data-tip={isStarred ? 'Un-Star Project' : 'Star Project'}
+        >
+          <Star onClick={handleStarClick} />
         </StyledStar>
       )}
 
