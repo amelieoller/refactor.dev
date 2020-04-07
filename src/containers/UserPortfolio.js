@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import Projects from '../components/Projects/Projects';
+import Projects from '../components/Projects';
 import { firestore } from '../firebase';
 import { collectIdsAndData } from '../utils/utilities';
 

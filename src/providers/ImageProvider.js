@@ -22,12 +22,10 @@ const ImageProvider = ({ children }) => {
     setImages(importedImages);
   }, []);
 
-  console.log('images:', images);
-
   return (
     <ImageContext.Provider
       value={{
-        images
+        images,
       }}
     >
       {children}

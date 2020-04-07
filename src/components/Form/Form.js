@@ -143,7 +143,7 @@ const Form = ({ existingProject, history, titleText, user, images }) => {
     starred: false,
     tags: [],
     updated: new Date(),
-    userUid: user.uid
+    userUid: user.uid,
   };
 
   const [project, setProject] = useState(initialProjectState);
@@ -202,7 +202,7 @@ const Form = ({ existingProject, history, titleText, user, images }) => {
       'folder',
       'image',
       'server',
-      'live'
+      'live',
     ];
 
     const attrCompare = attributes.every(attr => project[attr] === initialProject[attr]);
