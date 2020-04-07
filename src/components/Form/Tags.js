@@ -74,7 +74,7 @@ const Tags = ({ project, setProject, user }) => {
 
     setProject({
       ...project,
-      tags: newTags
+      tags: newTags,
     });
   };
 
@@ -99,7 +99,7 @@ const Tags = ({ project, setProject, user }) => {
 
   return (
     <StyledTags>
-      <div className="input-label">Tags</div>
+      {tags && tags.length !== 0 && <div className="input-label">Tags</div>}
       {tags &&
         tags.map(tag => (
           <div className="tag-wrapper" key={tag.id}>
@@ -123,7 +123,7 @@ const Tags = ({ project, setProject, user }) => {
       <div className="new-tag-form">
         <Input
           onChange={e => setNewTag(e.target.value)}
-          onKeyDown={e => e.keyCode === 13 && handleTagCreation()}
+          onKeyDown={e => e.keyCode === 13 && e.preventDefault() && handleTagCreation()}
           value={newTag}
           name="newTag"
           placeholder="New Tag Name"
