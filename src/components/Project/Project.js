@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { firestore } from '../../firebase';
 import { ReactComponent as Star } from '../../assets/icons/star.svg';
@@ -132,7 +133,7 @@ const Project = ({
   selectedSort,
   user,
   noAccess,
-  images
+  images,
 }) => {
   const handleDelete = id => {
     firestore.doc(`users/${user.uid}/projects/${id}`).delete();
@@ -168,15 +169,17 @@ const Project = ({
         </StyledStar>
       )}
 
-      <ProjectImageTop
-        image={
-          project.image && images[project.image]
-            ? images[project.image]
-            : images['default.svg']
-        }
-        starred={isStarred}
-        onClick={expandCard}
-      />
+      <Link to={`/projects/${project.id}/edit`}>
+        <ProjectImageTop
+          image={
+            project.image && images[project.image]
+              ? images[project.image]
+              : images['default.svg']
+          }
+          starred={isStarred}
+          onClick={expandCard}
+        />
+      </Link>
       <ProjectBody starred={isStarred}>
         <WithoutExtraContent>
           <TopContent>
@@ -193,7 +196,6 @@ const Project = ({
           <Footer
             project={project}
             handleDelete={handleDelete}
-            expandCard={expandCard}
             showExtraInfo={projectOpenId === project.id}
             noAccess={noAccess}
           />
@@ -210,8 +212,8 @@ Project.propTypes = {
     image: PropTypes.string.isRequired,
     folder: PropTypes.string.isRequired,
     github: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
-  })
+    id: PropTypes.string.isRequired,
+  }),
 };
 
 export default withUser(withImages(Project));
