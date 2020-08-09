@@ -19,6 +19,9 @@ const StyledInput = styled.div`
 
   input,
   textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     margin-top: 0.4rem;
     font-size: ${props => (props.small ? '1.3rem' : '1.5rem')};
     font-weight: 300;

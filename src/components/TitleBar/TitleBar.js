@@ -27,7 +27,8 @@ const StyledTitleBar = styled.div`
   /* SHADOW */
   &::before {
     top: 34px; /* shadow is at bottom of element, so at 34 + 16 = 64px */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   }
 
   /* COVER */
